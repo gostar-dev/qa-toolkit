@@ -186,7 +186,9 @@ qa-toolkit/
 ├─ tools/
 │  ├─ mutation_check.py  테스트가 버그를 잡는지 확인
 │  └─ verify_files.py    파일 무결성 확인 (MANIFEST.sha256)
-├─ docs/                코드 해설, AI 활용 및 검증 기록
+├─ docs/
+│  ├─ code_guide.md            코드 해설, 예상 면접 질문
+│  └─ ai_verification_log.md   AI 활용 및 검증 기록
 ├─ .github/workflows/qa-gate.yml
 └─ run_demo.py
 ```
