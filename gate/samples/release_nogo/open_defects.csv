@@ -1,0 +1,7 @@
+id,title,category,severity,priority,status,fix_plan
+QD-531,결제 취소 후 재구매 시 영수증 검증 실패,결제,Critical,P1,Open,N
+QD-533,보너스 2연속 당첨 시 지급 재화 중복 반영,재화,Major,P1,Fixed,Y
+QD-535,미션 보상 지급 조건 경계값 오판정,재화,Minor,P2,Open,Y
+QD-536,iOS 특정 기종 릴 정지 위치 어긋남,기본기능,Major,P2,Deferred,N
+QD-538,딥링크 이벤트 페이지 진입 실패 (Android 12),딥링크,Major,P3,Open,N
+QD-540,튜토리얼 말풍선 오타,기본기능,Cosmetic,P3,Open,N

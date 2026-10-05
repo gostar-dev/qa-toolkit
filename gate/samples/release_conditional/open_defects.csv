@@ -1,0 +1,5 @@
+id,title,category,severity,priority,status,fix_plan
+QD-521,iPad 가로 모드에서 메뉴 버튼 일부 가림,기본기능,Major,P3,Open,Y
+QD-523,특정 OS 버전 딥링크 진입 후 뒤로가기 시 홈 이동,딥링크,Minor,P1,In Progress,Y
+QD-524,프리스핀 종료 효과음 반복 재생,사운드,Minor,P2,Open,N
+QD-517,결과 팝업 금액 폰트 깨짐 (일부 기기),기본기능,Minor,P3,Open,N

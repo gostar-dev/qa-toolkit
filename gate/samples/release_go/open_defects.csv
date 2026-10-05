@@ -1,0 +1,4 @@
+id,title,category,severity,priority,status,fix_plan
+QD-512,결과 팝업 닫기 버튼 그림자 1px 어긋남,기본기능,Cosmetic,P3,Open,N
+QD-515,딥링크 진입 시 로딩 문구 줄바꿈,딥링크,Minor,P3,Open,N
+QD-498,보너스 진입 연출 중 사운드 끊김,사운드,Major,P2,Verified,Y

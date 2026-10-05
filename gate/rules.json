@@ -1,0 +1,19 @@
+{
+  "_설명": "심각도 x 우선순위 매트릭스. block=출시 차단, conditional=수정 계획 합의 시 조건부 출시, after=출시 후 대응",
+  "matrix": {
+    "Critical": {"P1": "block",       "P2": "block",       "P3": "block"},
+    "Major":    {"P1": "block",       "P2": "block",       "P3": "conditional"},
+    "Minor":    {"P1": "conditional", "P2": "after",       "P3": "after"},
+    "Cosmetic": {"P1": "after",       "P2": "after",       "P3": "after"}
+  },
+  "_critical_categories": "금전성 영역. 통과율 100% 필수, 차단 TC 허용 안 함, 결함 심각도 한 단계 상향",
+  "critical_categories": ["결제", "재화", "DB 정합성"],
+  "escalate_in_critical": true,
+  "min_pass_rate_overall": 0.95,
+  "min_pass_rate_category": 0.95,
+  "min_pass_rate_critical": 1.0,
+  "max_na_rate": 0.10,
+  "_open_statuses": "게이트 판정에 포함하는 상태. Fixed 는 수정됐지만 재검증 전이라 아직 열린 것으로 본다. Deferred(보류)도 판정에서 빼지 않는다",
+  "open_statuses": ["Open", "In Progress", "Reopened", "Fixed", "Deferred"],
+  "closed_statuses": ["Verified", "Closed"]
+}
