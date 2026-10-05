@@ -1,0 +1,51 @@
+# 배포 파이프라인에 품질 게이트를 붙이는 예시 (GitHub Actions)
+# 0) 저장소 파일이 배포본과 똑같은지 지문(SHA-256)으로 확인한다.
+# 1) 도구 자체의 테스트를 먼저 돌린다. 도구가 틀리면 판정도 믿을 수 없기 때문이다.
+# 2) 정합성 대사를 돌린다. 결함 후보가 나오면(종료 코드 2) 파이프라인을 멈춘다.
+# 3) 릴리즈 게이트를 돌린다. NO-GO(2) 또는 입력 오류(3)면 배포 단계로 넘어가지 않는다.
+#    CONDITIONAL GO(1)는 멈추지 않고 경고만 남긴다. 조건부 출시는 사람이 최종 승인한다.
+name: qa-gate
+
+on:
+  workflow_dispatch:
+  pull_request:
+
+jobs:
+  quality-gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: 파일 무결성 확인
+        run: python tools/verify_files.py
+
+      - run: pip install -r requirements.txt
+
+      - name: 도구 자체 테스트
+        run: python -m pytest
+
+      - name: 테스트가 버그를 잡는지 확인 (뮤테이션)
+        run: python tools/mutation_check.py
+
+      - name: 정합성 대사
+        run: |
+          python -m recon generate --scenario game --db data/game.db
+          python -m recon check --scenario game --db data/game.db \
+            --start "2026-03-02" --end "2026-03-05" --csv reports/findings.csv
+
+      - name: 릴리즈 품질 게이트
+        run: |
+          set +e
+          python -m gate --results gate/samples/release_go/tc_results.csv \
+                         --defects gate/samples/release_go/open_defects.csv --md reports/gate.md
+          code=$?
+          if [ $code -eq 1 ]; then echo "::warning::CONDITIONAL GO - 조건부 출시, 담당자 승인 필요"; exit 0; fi
+          exit $code
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: qa-reports
+          path: reports/
